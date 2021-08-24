@@ -37,7 +37,7 @@ public class CustomerServiceTest {
     @Test
     public void test01() {
         // 创建一个用户
-        long customerId = customerService.register("杨四正", "12345654321");
+        long customerId = customerService.register("张三", "12345654321");
         // 为用户添加一个配送地址
         long addressId = customerService.addAddress(customerId,
                 "牛栏村", "牛栏市", "矮人国");
@@ -53,7 +53,7 @@ public class CustomerServiceTest {
         // 入库一些商品
         Product product = new Product();
         product.setName("MyBatis课程");
-        product.setDescription("深入MyBatis源码的视频教程");
+        product.setDescription("深入MyBatis源码");
         product.setPrice(new BigDecimal(99));
         long productId = productService.createProduct(product);
         System.out.println("create productId:" + productId);
@@ -72,5 +72,11 @@ public class CustomerServiceTest {
 
         Order order2 = orderService.find(orderId);
         System.out.println(order2);
+    }
+
+    @Test
+    public void test2(){
+        Customer customer = customerService.find(11);
+        System.out.printf("customer:%s", customer);
     }
 }
