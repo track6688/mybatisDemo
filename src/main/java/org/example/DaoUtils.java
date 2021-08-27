@@ -12,9 +12,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
-import com.mysql.cj.xdevapi.SessionFactory;
-
-
 /**
  * Created on 2020-10-30
  */
