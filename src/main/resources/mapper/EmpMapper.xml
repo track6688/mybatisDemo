@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.dao.EmpMapper">
+
+    <resultMap id="empMap" type="org.example.domain.Emp">
+        <id column="id" property="id"/>
+        <result column="user_name" property="userName"/>
+        <result column="age" property="age"/>
+    </resultMap>
+
+    <select id="selectById" parameterType="integer" resultMap="empMap">
+        select * from t_emp where id = #{id}
+    </select>
+
+    <insert id="save" parameterType="org.example.domain.Emp">
+        insert into t_emp(id, user_name, age) value (#{id}, #{userName}, #{age})
+    </insert>
+
+    <update id="update" parameterType="org.example.domain.Emp">
+        update t_emp set user_name = #{userName}, age = #{age} where id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="integer">
+        delete from t_emp where id = #{id}
+    </delete>
+
+    <select id="selectAllEmpMap" resultType="org.example.domain.Emp">
+        select t.id, t.user_name as userName, t.age from t_emp t;
+    </select>
+
+
+    <!-- 嵌套结果 -->
+    <resultMap id="empInfoMap" type="org.example.dto.EmpInfoDto">
+        <result column="user_name" property="userName"/>
+        <result column="age" property="age"/>
+        <association property="dept">
+            <id column="dept_id" property="id"/>
+            <result column="dept_name" property="deptName"/>
+        </association>
+    </resultMap>
+
+    <!-- 嵌套查询 -->
+    <resultMap id="empInfoSelectMap" type="org.example.dto.EmpInfoDto">
+        <result column="user_name" property="userName"/>
+        <result column="age" property="age"/>
+        <association property="dept" column="dept_id" select="org.example.dao.DeptMapper.findDeptById">
+        </association>
+    </resultMap>
+
+    <select id="findEmpInfoDtoSelect" parameterType="integer" resultMap="empInfoSelectMap">
+        select * from t_emp where id = #{id}
+    </select>
+
+
+
+    <select id="findEmpInfoDtoById" parameterType="integer" resultMap="empInfoMap">
+        select e.user_name, e.age, d.id as dept_id, d.dept_name
+        from t_emp e inner join t_dept d on e.dept_id = d.id
+        where e.id = #{id}
+    </select>
+
+
+
+</mapper>

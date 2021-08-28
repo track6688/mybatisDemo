@@ -3,6 +3,8 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd" >
 <configuration>
 
+
+
     <properties> <!-- 定义属性值 -->
         <property name="username" value="root"/>
         <property name="id" value="xxx"/>
@@ -39,5 +41,7 @@
         <mapper resource="mapper/OrderItemMapper.xml"/>
         <mapper resource="mapper/OrderMapper.xml"/>
         <mapper resource="mapper/ProductMapper.xml"/>
+        <mapper resource="mapper/EmpMapper.xml"/>
+        <mapper resource="mapper/DeptMapper.xml"/>
     </mappers>
 </configuration>
