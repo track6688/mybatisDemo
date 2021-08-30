@@ -1,6 +1,6 @@
 package example.jdbc.test;
 
-import example.jdbc.domain.User;
+import org.example.domain.User;
 import org.junit.Test;
 
 import java.sql.*;

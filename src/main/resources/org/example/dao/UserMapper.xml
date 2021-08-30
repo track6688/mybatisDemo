@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.dao.UserMapper">
+    <update id="updateUser" parameterType="org.example.domain.User">
+        UPDATE t_user
+        <trim prefix="SET" prefixOverrides=",">
+            <if test="userName != null and userName != ''">
+                , user_name = #{userName}
+            </if>
+            <if test="age != null">
+                , age = #{age}
+            </if>
+            <if test="createTime != null">
+                , create_time = #{createTime}
+            </if>
+            WHERE id = #{id}
+        </trim>
+
+    </update>
+
+    <select id="selectById" parameterType="integer" resultType="org.example.domain.User">
+        select u.id, u.user_name AS userName, u.age, u.create_time AS createTime
+        from t_user u
+        where u.id = #{id}
+    </select>
+
+</mapper>

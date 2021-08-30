@@ -1,4 +1,4 @@
-package example.jdbc.domain;
+package org.example.domain;
 
 import lombok.Data;
 
