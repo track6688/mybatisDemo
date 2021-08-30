@@ -4,15 +4,12 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import org.example.DaoUtils;
-import org.example.dao.AddressMapper;
-import org.example.dao.CustomerMapper;
-import org.example.dao.OrderItemMapper;
-import org.example.dao.OrderMapper;
+import org.example.mapper.AddressMapper;
+import org.example.mapper.OrderItemMapper;
+import org.example.mapper.OrderMapper;
 import org.example.domain.Address;
-import org.example.domain.Customer;
 import org.example.domain.Order;
 import org.example.domain.OrderItem;
-import org.example.domain.Product;
 
 import com.google.common.base.Preconditions;
 

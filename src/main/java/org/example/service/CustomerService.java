@@ -3,8 +3,8 @@ package org.example.service;
 import java.util.List;
 
 import org.example.DaoUtils;
-import org.example.dao.AddressMapper;
-import org.example.dao.CustomerMapper;
+import org.example.mapper.AddressMapper;
+import org.example.mapper.CustomerMapper;
 import org.example.domain.Address;
 import org.example.domain.Customer;
 

@@ -1,8 +1,7 @@
-package org.example.dao;
+package org.example.mapper;
 
 import java.util.List;
 
-import org.example.domain.Address;
 import org.example.domain.Product;
 
 /**
