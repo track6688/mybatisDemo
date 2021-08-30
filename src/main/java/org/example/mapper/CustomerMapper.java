@@ -1,4 +1,4 @@
-package org.example.dao;
+package org.example.mapper;
 
 import org.example.domain.Customer;
 
