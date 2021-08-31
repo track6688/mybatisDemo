@@ -3,14 +3,14 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd" >
 <configuration>
 
-
-
     <properties> <!-- 定义属性值 -->
         <property name="username" value="root"/>
         <property name="id" value="xxx"/>
     </properties>
     <settings><!-- 全局配置信息 -->
         <setting name="cacheEnabled" value="true"/>
+        <setting name="logImpl" value="STDOUT_LOGGING" />
+
     </settings>
     <typeAliases>
         <!-- 配置别名信息，在映射配置文件中可以直接使用Customer这个别名
@@ -21,6 +21,12 @@
         <typeAlias type="org.example.domain.OrderItem" alias="OrderItem"/>
         <typeAlias type="org.example.domain.Product" alias="Product"/>
     </typeAliases>
+
+    <!-- 插件 位置有要求的哦！-->
+    <plugins>
+        <plugin interceptor="org.example.plugin.PrintfSqlPlugin"/>
+    </plugins>
+
     <environments default="development">
         <environment id="development">
             <!-- 配置事务管理器的类型 -->
@@ -34,16 +40,19 @@
             </dataSource>
         </environment>
     </environments>
+
+
+
     <!-- 配置映射配置文件的位置 -->
     <mappers>
-        <package name="org.example.dao" />
-<!--        <mapper resource="mapper/CustomerMapper.xml"/>-->
-<!--        <mapper resource="mapper/AddressMapper.xml"/>-->
-<!--        <mapper resource="mapper/OrderItemMapper.xml"/>-->
-<!--        <mapper resource="mapper/OrderMapper.xml"/>-->
-<!--        <mapper resource="mapper/ProductMapper.xml"/>-->
-<!--        <mapper resource="mapper/EmpMapper.xml"/>-->
-<!--        <mapper resource="mapper/DeptMapper.xml"/>-->
-<!--        <mapper resource="mapper/UserMapper.xml"/>-->
+<!--        <package name="org.example.dao" />-->
+        <mapper resource="mapper/CustomerMapper.xml"/>
+        <mapper resource="mapper/AddressMapper.xml"/>
+        <mapper resource="mapper/OrderItemMapper.xml"/>
+        <mapper resource="mapper/OrderMapper.xml"/>
+        <mapper resource="mapper/ProductMapper.xml"/>
+        <mapper resource="mapper/EmpMapper.xml"/>
+        <mapper resource="mapper/DeptMapper.xml"/>
+        <mapper resource="mapper/UserMapper.xml"/>
     </mappers>
 </configuration>

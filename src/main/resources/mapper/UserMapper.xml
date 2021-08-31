@@ -26,4 +26,23 @@
         where u.id = #{id}
     </select>
 
+    <select id="selectByList" parameterType="list" resultType="org.example.domain.User">
+        select u.id, u.user_name AS userName, u.age, u.create_time AS createTime
+        from t_user u
+        where u.id IN
+        <foreach collection="list" open="(" close=")" item="item" separator=",">
+            #{item}
+        </foreach>
+    </select>
+
+    <select id="selectByYearTable" parameterType="map" resultType="org.example.domain.User">
+        select u.id, u.user_name AS userName, u.age, u.create_time AS createTime
+        from t_user#{year} u where u.id = #{id}
+    </select>
+
+    <select id="selectByYearTable2" parameterType="map" resultType="org.example.domain.User">
+        select u.id, u.user_name AS userName, u.age, u.create_time AS createTime
+        from t_user${year} u where u.id = #{id}
+    </select>
+
 </mapper>

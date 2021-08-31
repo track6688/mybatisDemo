@@ -9,19 +9,6 @@ import java.util.List;
 import java.util.Map;
 
 public interface EmpMapper {
-    void save(Emp emp);
-
-    void update(Emp emp);
-
-    void delete(Integer id);
-
-    List<Emp> selectById(Integer id);
-
-    @Select("select * from t_emp t where t.id = #{id} limit 1")
-    Emp selectOneById(Integer id);
-
-    @MapKey("id")
-    Map<Integer, Emp> selectAllEmpMap();
 
     EmpInfoDto findEmpInfoDtoById(Integer id);
 

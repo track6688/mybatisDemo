@@ -4,33 +4,6 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.example.dao.EmpMapper">
 
-    <resultMap id="empMap" type="org.example.domain.Emp">
-        <id column="id" property="id"/>
-        <result column="user_name" property="userName"/>
-        <result column="age" property="age"/>
-    </resultMap>
-
-    <select id="selectById" parameterType="integer" resultMap="empMap">
-        select * from t_emp where id = #{id}
-    </select>
-
-    <insert id="save" parameterType="org.example.domain.Emp">
-        insert into t_emp(id, user_name, age) value (#{id}, #{userName}, #{age})
-    </insert>
-
-    <update id="update" parameterType="org.example.domain.Emp">
-        update t_emp set user_name = #{userName}, age = #{age} where id = #{id}
-    </update>
-
-    <delete id="delete" parameterType="integer">
-        delete from t_emp where id = #{id}
-    </delete>
-
-    <select id="selectAllEmpMap" resultType="org.example.domain.Emp">
-        select t.id, t.user_name as userName, t.age from t_emp t;
-    </select>
-
-
     <!-- 嵌套结果 -->
     <resultMap id="empInfoMap" type="org.example.dto.EmpInfoDto">
         <result column="user_name" property="userName"/>
@@ -53,12 +26,14 @@
         select * from t_emp where id = #{id}
     </select>
 
-
-
     <select id="findEmpInfoDtoById" parameterType="integer" resultMap="empInfoMap">
         select e.user_name, e.age, d.id as dept_id, d.dept_name
         from t_emp e inner join t_dept d on e.dept_id = d.id
         where e.id = #{id}
+    </select>
+
+    <select id="selectById" parameterType="long" resultType="map">
+        select * from t_emp t where t.id = #{id}
     </select>
 
 

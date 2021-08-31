@@ -19,7 +19,7 @@ public class JdbcDemoTest {
             Class.forName("com.mysql.jdbc.Driver");
 
             // 2.创建连接
-            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/test", "root", "123456");
+            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/mybatis", "root", "123456");
 
             // 3.创建SQL语句
             String sql = "select id,user_name,age, create_time from t_user where id=?";
