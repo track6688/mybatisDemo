@@ -37,12 +37,54 @@
 
     <select id="selectByYearTable" parameterType="map" resultType="org.example.domain.User">
         select u.id, u.user_name AS userName, u.age, u.create_time AS createTime
-        from t_user#{year} u where u.id = #{id}
+        from t_user#{year} u
+        <where>
+            <if test="id != null">
+                u.id = #{id}
+            </if>
+        </where>
     </select>
 
     <select id="selectByYearTable2" parameterType="map" resultType="org.example.domain.User">
         select u.id, u.user_name AS userName, u.age, u.create_time AS createTime
         from t_user${year} u where u.id = #{id}
+    </select>
+
+    <update id="batchUpdateUser" parameterType="list">
+        update t_user
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="user_name = case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    <if test="item.userName != null">
+                        when id = #{item.id}
+                        then #{item.userName}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="age = case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    <if test="item.age != null">
+                        when id = #{item.id}
+                        then #{item.age}
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        where id in
+        <foreach collection="list" item="item" index="index" separator="," open="(" close=")">
+            #{item.id}
+        </foreach>
+    </update>
+
+
+    <!-- sql标签 -->
+    <sql id="userColumns"> ${tableName}.id,${tableName}.user_name,${tableName}.age </sql>
+    <select id="selectUsers" resultType="map">
+        select
+        <include refid="userColumns"><property name="tableName" value="t1"/></include>,
+        <include refid="userColumns"><property name="tableName" value="t2"/></include>
+        from t_user t1
+        cross join t_user t2
     </select>
 
 </mapper>

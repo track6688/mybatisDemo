@@ -59,10 +59,11 @@ public class ExampleTest {
         SqlSession sqlSession = sqlSessionFactory.openSession();
 
         Map<String, Object> params = new HashMap<>();
-        params.put("year", 2021);
+        params.put("year", "2021");
         params.put("id", 1);
 
-        User user2021 = sqlSession.selectOne("org.example.dao.UserMapper.selectByYearTable2", params);
+        User user2021 = sqlSession.selectOne("org.example.dao.UserMapper.selectByYearTable", params);
+        //User user2021 = sqlSession.selectOne("org.example.dao.UserMapper.selectByYearTable2", params);
         System.out.println("2021表数据：" + user2021);
     }
 
@@ -114,6 +115,31 @@ public class ExampleTest {
         Long id = 1L;
         Object obj = sqlSession.selectOne("findAll", id);
         System.out.println(obj);
+    }
+
+    @Test
+    public void testBatchUpdate(){
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        User user = new User();
+        user.setId(1L);
+        user.setUserName("王七");
+        user.setAge(88);
+
+        User user2 = new User();
+        user2.setId(2L);
+        user2.setUserName("王八");
+        user2.setAge(87);
+
+        List<User> userList = Arrays.asList(user, user2);
+        sqlSession.update("org.example.dao.UserMapper.batchUpdateUser", userList);
+        sqlSession.commit();
+    }
+
+    @Test
+    public void testSql(){
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        Map<String, Object> map = sqlSession.selectOne("org.example.dao.UserMapper.selectUsers");
+        System.out.println(map);
     }
 
 

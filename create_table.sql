@@ -1,64 +1,92 @@
-SET NAMES utf8;
-SET FOREIGN_KEY_CHECKS = 0;
+create table t_address
+(
+    id bigint auto_increment
+        primary key,
+    street varchar(255) null,
+    city varchar(255) null,
+    country varchar(255) null,
+    customer_id bigint null
+);
 
--- ----------------------------
--- Table structure for t_address
--- ----------------------------
-DROP TABLE IF EXISTS `t_address`;
-CREATE TABLE `t_address` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `street` varchar(255) DEFAULT NULL,
-  `city` varchar(255) DEFAULT NULL,
-  `country` varchar(255) DEFAULT NULL,
-  `customer_id` bigint DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+create table t_customer
+(
+    id bigint auto_increment
+        primary key,
+    name varchar(255) not null,
+    phone varchar(255) null
+);
 
--- ----------------------------
--- Table structure for t_customer
--- ----------------------------
-DROP TABLE IF EXISTS `t_customer`;
-CREATE TABLE `t_customer` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  `phone` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+create table t_dept
+(
+    id int auto_increment
+        primary key,
+    dept_name varchar(50) null
+)
+    comment '组织表';
 
--- ----------------------------
--- Table structure for t_order
--- ----------------------------
-DROP TABLE IF EXISTS `t_order`;
-CREATE TABLE `t_order` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `address_id` bigint DEFAULT NULL,
-  `customer_id` bigint DEFAULT NULL,
-  `create_time` bigint DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+create table t_emp
+(
+    id int auto_increment
+        primary key,
+    user_name varchar(128) null,
+    age int null,
+    dept_id int null
+)
+    comment 'emp';
 
--- ----------------------------
--- Table structure for t_order_item
--- ----------------------------
-DROP TABLE IF EXISTS `t_order_item`;
-CREATE TABLE `t_order_item` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `amount` int DEFAULT NULL,
-  `order_id` bigint DEFAULT NULL,
-  `product_id` bigint DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+create table t_order
+(
+    id bigint auto_increment
+        primary key,
+    address_id bigint null,
+    customer_id bigint null,
+    create_time bigint null
+);
 
--- ----------------------------
--- Table structure for t_product
--- ----------------------------
-DROP TABLE IF EXISTS `t_product`;
-CREATE TABLE `t_product` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
-  `description` varchar(255) DEFAULT NULL,
-  `price` bigint DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+create table t_order_item
+(
+    id bigint auto_increment
+        primary key,
+    amount int null,
+    order_id bigint null,
+    product_id bigint null
+);
 
-SET FOREIGN_KEY_CHECKS = 1;
+create table t_product
+(
+    id bigint auto_increment
+        primary key,
+    name varchar(255) null,
+    description varchar(255) null,
+    price bigint null
+);
+
+create table t_user
+(
+    id bigint auto_increment
+        primary key,
+    year int null,
+    user_name varchar(100) null,
+    age int null,
+    create_time datetime null
+);
+
+create table t_user2021
+(
+    id bigint auto_increment
+        primary key,
+    year int null,
+    user_name varchar(100) null,
+    age int null,
+    create_time datetime null
+);
+
+create table t_user_2021
+(
+    id bigint auto_increment
+        primary key,
+    year int null,
+    user_name varchar(100) null,
+    age int null,
+    create_time datetime null
+);
